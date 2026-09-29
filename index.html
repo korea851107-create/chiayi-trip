@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>嘉義兩天一夜｜一週年旅行</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#171716; --card:#201f1d; --ink:#eae6dd; --sub:#8a8579; --line:#3a3733; --accent:#d9711f; --gold:#e0b03a;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+  box-sizing:border-box;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px);}
+*{box-sizing:border-box;}
+body{
+  margin:0; background:var(--cream); color:var(--ink);
+  font-family:"Noto Sans TC",sans-serif; min-height:100%;
+  -webkit-font-smoothing:antialiased;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size:34px 34px;
+  background-position:-1px -1px;
+  background-attachment:fixed;
+  opacity:1;
+}
+.mono{font-family:"IBM Plex Mono",monospace;}
+.wrap{max-width:680px; margin:0 auto; padding:28px 18px 60px;}
+header{text-align:left; margin-bottom:26px; border-bottom:2px solid var(--accent); padding-bottom:14px;}
+header .sub{font-family:"IBM Plex Mono",monospace; font-size:12px; letter-spacing:3px; color:var(--accent); text-transform:uppercase;}
+header h1{
+  font-family:"Noto Sans TC",sans-serif; font-weight:900; font-size:clamp(24px,6.5vw,34px);
+  margin:8px 0 6px; color:var(--ink); letter-spacing:1px;
+}
+header .date{font-family:"IBM Plex Mono",monospace; font-size:13px; color:var(--sub);}
+.heart{color:var(--accent); font-size:16px; font-family:"IBM Plex Mono",monospace;}
+.tabs{display:flex; gap:10px; margin:22px 0 26px; position:sticky; top:env(safe-area-inset-top,0px); z-index:5; background:var(--cream); padding:6px 0;}
+.tab{
+  flex:1; max-width:200px; text-align:center; padding:11px 14px; border-radius:0;
+  border:2px solid var(--line); background:var(--card); color:var(--sub); font-weight:700;
+  font-family:"IBM Plex Mono",monospace; font-size:13px; letter-spacing:1px; cursor:pointer; transition:all .15s;
+}
+.tab.active{background:var(--accent); border-color:var(--accent); color:#171716;}
+.day{display:none;}
+.day.active{display:block; animation:fade .35s ease;}
+@keyframes fade{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;}}
+.day-title{font-family:"Noto Sans TC",sans-serif; font-size:18px; font-weight:900; margin:0 0 4px; color:var(--ink); text-transform:uppercase; letter-spacing:.5px;}
+.day-note{font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--sub); margin-bottom:18px;}
+.timeline{position:relative; padding-left:24px;}
+.timeline::before{content:"";position:absolute; left:5px; top:6px; bottom:6px; width:2px; background:repeating-linear-gradient(var(--line) 0 6px, transparent 6px 10px);}
+.item{position:relative; margin-bottom:14px;}
+.item::before{
+  content:""; position:absolute; left:-24px; top:6px; width:9px; height:9px; border-radius:0;
+  background:var(--accent); transform:rotate(45deg);
+}
+.item.move::before{width:5px; height:5px; left:-22px; top:8px; background:var(--sub); transform:none;}
+.card{background:var(--card); border:1px solid var(--line); border-left:3px solid var(--accent); border-radius:0; padding:13px 16px;}
+.item.move .card{background:transparent; border:none; padding:2px 4px 2px 0;}
+.time{font-family:"IBM Plex Mono",monospace; font-size:12.5px; font-weight:700; color:var(--accent); letter-spacing:.5px;}
+.item.move .time{color:var(--sub); font-weight:500;}
+.title{font-family:"Noto Sans TC",sans-serif; font-size:16px; font-weight:700; margin:3px 0 2px; color:var(--ink);}
+.item.move .title{font-family:"IBM Plex Mono",monospace; font-size:12.5px; font-weight:500; color:var(--sub); letter-spacing:.3px;}
+.addr{font-family:"IBM Plex Mono",monospace; font-size:11.5px; color:var(--sub); margin-bottom:8px; line-height:1.6;}
+.meta{display:flex; flex-wrap:wrap; gap:6px 8px; align-items:center;}
+.pill{font-family:"IBM Plex Mono",monospace; font-size:11px; padding:3px 8px; border-radius:0; background:var(--cream); color:var(--sub); border:1px solid var(--line); letter-spacing:.3px;}
+.pill.money{color:var(--gold); border-color:var(--gold); font-weight:600;}
+.note{font-family:"Noto Sans TC",sans-serif; font-size:12.5px; color:var(--accent); margin-top:8px; font-weight:500; padding-left:14px; border-left:2px solid var(--accent);}
+.note::before{content:"NOTE — ";font-family:"IBM Plex Mono",monospace; font-size:10px; color:var(--sub); letter-spacing:1px;}
+.hardtime{background:repeating-linear-gradient(135deg, #2b2410, #2b2410 8px, #241f0d 8px, #241f0d 16px); border-color:var(--gold); border-left-color:var(--gold); color:var(--gold);}
+.pill.hardtime{background:transparent;}
+footer{font-family:"IBM Plex Mono",monospace; text-align:left; margin-top:30px; font-size:11px; color:var(--sub); border-top:1px solid var(--line); padding-top:14px; letter-spacing:.5px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="sub">// ONE YEAR ANNIVERSARY TRIP</div>
+    <h1>嘉義兩天一夜</h1>
+    <div class="date">2026.10.14 — 2026.10.15</div>
+  </header>
+
+  <div class="tabs">
+    <div class="tab active" onclick="showDay(1,this)">Day 1｜10.14</div>
+    <div class="tab" onclick="showDay(2,this)">Day 2｜10.15</div>
+  </div>
+
+  <!-- DAY 1 -->
+  <div class="day active" id="day1">
+    <div class="day-title">Day 1．台中 → 嘉義市區</div>
+    <div class="day-note">火雞肉飯、老屋、文創園區到深夜甜點約會</div>
+    <div class="timeline">
+      <div class="item"><div class="card"><div class="time">09:00</div><div class="title">台中出發</div><div class="addr">台中市西屯區順和三街58號</div><div class="meta"><span class="pill">→嘉義約 1h30–1h40</span></div></div></div>
+
+      <div class="item"><div class="card"><div class="time">10:40–11:30</div><div class="title">桃城三禾火雞肉飯</div><div class="addr">嘉義市東區民權路97號</div><div class="meta"><span class="pill">停留 50m</span><span class="pill money">NT$200–350</span></div></div></div>
+
+      <div class="item move"><div class="card"><div class="time">11:30–11:40</div><div class="title">移動：三禾 → 檜意森活村（約1–2km／5–10m）</div></div></div>
+
+      <div class="item"><div class="card"><div class="time">11:40–13:20</div><div class="title">檜意森活村</div><div class="addr">嘉義市東區共和路356巷3號</div><div class="meta"><span class="pill">停留 1h40</span><span class="pill money">購物另計</span></div><div class="note">福義軒等伴手禮可在這裡買</div></div></div>
+
+      <div class="item move"><div class="card"><div class="time">13:20–13:30</div><div class="title">移動：檜意 → 花磚博物館（約5–10m）</div></div></div>
+
+      <div class="item"><div class="card"><div class="time">13:30–14:30</div><div class="title">臺灣花磚博物館</div><div class="addr">嘉義市西區林森西路282號</div><div class="meta"><span class="pill">停留 1h</span><span class="pill money">門票依現場</span></div></div></div>
+
+      <div class="item move"><div class="card"><div class="time">14:30–14:45</div><div class="title">移動：花磚 → 起風（約10–15m）</div></div></div>
+
+      <div class="item"><div class="card"><div class="time">14:45–16:15</div><div class="title">起風</div><div class="addr">嘉義市東區興業新村40號</div><div class="meta"><span class="pill">停留 1h30</span><span class="pill money">NT$500–800</span></div><div class="note">老屋茶館</div></div></div>
+
+      <div class="item move"><div class="card"><div class="time">16:15–16:35</div><div class="title">移動：起風 → 嘉楠風華（約15–20m）</div></div></div>
+
+      <div class="item"><div class="card"><div class="time">16:35–17:40</div><div class="title">嘉楠風華酒店</div><div class="addr">嘉義市西區四維路232號</div><div class="meta"><span class="pill">休息／換衣補妝</span><span class="pill money">住宿另計</span></div></div></div>
+
+      <div class="item"><div class="card"><div class="time">17:40–18:00</div><div class="title">計程車：飯店 → 文化路夜市</div><div class="addr">約10–15m</div><div class="meta"><span class="pill money">NT$150–200</span></div><div class="note">車留飯店</div></div></div>
+
+      <div class="item"><div class="card"><div class="time">18:00–19:05</div><div class="title">文化路夜市</div><div class="addr">分食小吃</div><div class="meta"><span class="pill">停留 1h05</span><span class="pill money">NT$400–700</span></div><div class="note">不要吃太撐</div></div></div>
+
+      <div class="item move"><div class="card"><div class="time">19:05–19:20</div><div class="title">步行：文化路 → CASA（約8–12m）</div></div></div>
+
+      <div class="item"><div class="card"><div class="time">19:30–20:45</div><div class="title">CASA</div><div class="addr">嘉義市東區光彩街132號</div><div class="meta"><span class="pill">停留 1h15</span><span class="pill money">NT$1500–2000</span></div><div class="note">固定時間，別遲到</div></div></div>
+
+      <div class="item"><div class="card"><div class="time">20:45–21:15</div><div class="title">計程車回飯店：CASA → 嘉楠風華</div><div class="addr">約10–15m</div><div class="meta"><span class="pill money">NT$150–200</span></div></div></div>
+
+      <div class="item"><div class="card"><div class="time">約21:15</div><div class="title">回房休息</div><div class="addr">Day 1 — END</div></div></div>
+    </div>
+  </div>
+
+  <!-- DAY 2 -->
+  <div class="day" id="day2">
+    <div class="day-title">Day 2．市區文創 → 阿里山鄒族風情 → 返台中</div>
+    <div class="day-note">美術館、逐鹿城堡到鄒族風味餐，一路玩回家</div>
+    <div class="timeline">
+      <div class="item move"><div class="card"><div class="time">07:30</div><div class="title">起床、盥洗</div></div></div>
+
+      <div class="item"><div class="card"><div class="time">07:45–08:35</div><div class="title">嘉楠風華早餐</div><div class="addr">飯店內</div><div class="meta"><span class="pill">50m</span><span class="pill money">含早NT$0／另購約NT$500(2人)</span></div></div></div>
+
+      <div class="item move"><div class="card"><div class="time">08:35–09:30</div><div class="title">化妝＋換衣服（回房，55m）</div></div></div>
+
+      <div class="item move"><div class="card"><div class="time">09:30–09:45</div><div class="title">整理行李／退房（行李上車，15m）</div></div></div>
+
+      <div class="item move"><div class="card"><div class="time">09:45–09:55</div><div class="title">移動：飯店 → 嘉義市立美術館（約2km／5–10m）</div></div></div>
+
+      <div class="item"><div class="card"><div class="time">09:55–10:35</div><div class="title">嘉義市立美術館</div><div class="addr">嘉義市西區廣寧街101號</div><div class="meta"><span class="pill">40m</span><span class="pill money">依當期規定</span></div></div></div>
+
+      <div class="item"><div class="card"><div class="time">10:35–10:45</div><div class="title">嘉義文化創意產業園區</div><div class="addr">嘉義市西區山林路616號</div><div class="meta"><span class="pill">最多10m</span><span class="pill money">NT$0</span></div><div class="note">時間緊湊時第一順位可刪</div></div></div>
+
+      <div class="item move"><div class="card"><div class="time">10:45–11:20</div><div class="title">移動：嘉義市區 → 逐鹿（約30–40m）</div></div></div>
+
+      <div class="item"><div class="card"><div class="time">11:20–12:10</div><div class="title">逐鹿傳說城堡花園／文創園區</div><div class="addr">番路鄉觸口村梅花一路1-1號</div><div class="meta"><span class="pill">50m</span><span class="pill money">免費入園／體驗另計</span></div></div></div>
+
+      <div class="item"><div class="card hardtime"><div class="time">12:10</div><div class="title">⏰ 準時離開逐鹿，前往山美村</div><div class="meta"><span class="pill hardtime">硬時間，不要拖</span></div></div></div>
+
+      <div class="item move"><div class="card"><div class="time">12:10–12:50</div><div class="title">山區移動：逐鹿 → 遊芭絲（保守35–45m）</div></div></div>
+
+      <div class="item move"><div class="card"><div class="time">12:50–13:00</div><div class="title">抵達／停車（約10m緩衝）</div></div></div>
+
+      <div class="item"><div class="card"><div class="time">13:00–14:50</div><div class="title">遊芭絲鄒族餐廳</div><div class="addr">阿里山鄉山美村1-8號</div><div class="meta"><span class="pill">用餐 1h50</span><span class="pill money">NT$1000–1500</span></div><div class="note">2人已預約</div></div></div>
+
+      <div class="item move"><div class="card"><div class="time">14:50–15:00</div><div class="title">準備回程：不再排嘉義景點（10m）</div></div></div>
+
+      <div class="item"><div class="card"><div class="time">15:00–17:20/17:40</div><div class="title">直接回台中</div><div class="addr">→順和三街58號</div><div class="meta"><span class="pill">保守約2.5h</span></div><div class="note">18:00前抵達</div></div></div>
+
+      <div class="item"><div class="card"><div class="time">18:00後</div><div class="title">台中晚餐</div><div class="addr">回家放行李再吃，不趕</div><div class="meta"><span class="pill money">NT$600–1,000</span><span class="pill">餐廳待訂</span></div></div></div>
+    </div>
+  </div>
+
+  <footer>[ ANNIVERSARY — YEAR 01 ] MAY WE KEEP TRAVELING, EVERY YEAR AFTER.</footer>
+</div>
+
+<script>
+function showDay(n, el){
+  document.querySelectorAll('.day').forEach(d=>d.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('day'+n).classList.add('active');
+  el.classList.add('active');
+}
+</script>
+</body>
+</html>
